@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Tone from 'tone'
 
 // create a synth
@@ -7,21 +7,18 @@ const synth = new Tone.PluckSynth().toMaster()
 
 const ToneTest = props => {
   const { temperature, windSpeed, pressure, humidity } = props
-  console.log(temperature)
-  const notes = [
-    Math.floor(temperature),
-    Math.floor(windSpeed * 100),
-    pressure / 2,
-    humidity + 200,
-  ]
+  useEffect(() => {
+    Tone.Transport.stop()
+    Tone.Transport.start()
+  }, [temperature, windSpeed, pressure, humidity])
+  const notes = [200, 300, 400]
   // create a new sequence with the synth and notes
   const synthPart = new Tone.Sequence(
     function(time, note) {
       synth.triggerAttackRelease(note, time)
-      console.log(time)
     },
     notes,
-    `1n`,
+    `10n`,
   )
   synthPart.start()
   return (
