@@ -1,21 +1,20 @@
 import React, { useEffect } from 'react'
 import Tone from 'tone'
 
-const synth = new Tone.PluckSynth().toMaster()
+const synth = new Tone.DuoSynth().toMaster()
 
 const ToneTest = props => {
   const { temperature, windSpeed, pressure, humidity } = props
   useEffect(() => {
-    Tone.Transport.stop()
     Tone.Transport.start()
   }, [temperature, windSpeed, pressure, humidity])
   const notes = [
-    isFinite(temperature) ? temperature : null,
+    isFinite(temperature) ? temperature / 2 : null,
     isFinite(humidity) ? humidity : null,
-    isFinite(pressure) ? pressure / 2.5 : null,
+    isFinite(pressure) ? pressure / 4 : null,
   ]
-  console.log('P:', pressure / 2.5)
-  console.log('T:', temperature)
+  console.log('P:', pressure / 4)
+  console.log('T:', temperature / 2)
   console.log('H:', humidity)
   // create a new sequence with the synth and notes
   const synthPart = new Tone.Sequence(
@@ -23,7 +22,7 @@ const ToneTest = props => {
       synth.triggerAttackRelease(note, time)
     },
     notes,
-    windSpeed * 2,
+    humidity,
   )
   synthPart.start()
   return (
