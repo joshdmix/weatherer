@@ -14,13 +14,16 @@ const ToneTest = props => {
     isFinite(humidity) ? humidity : null,
     isFinite(pressure) ? pressure / 2.5 : null,
   ]
+  console.log('P:', pressure / 2.5)
+  console.log('T:', temperature)
+  console.log('H:', humidity)
   // create a new sequence with the synth and notes
   const synthPart = new Tone.Sequence(
     function(time, note) {
       synth.triggerAttackRelease(note, time)
     },
     notes,
-    windSpeed,
+    windSpeed * 2,
   )
   synthPart.start()
   return (
