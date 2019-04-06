@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Synth from './Synth'
-import Tone from './tone'
+import ToneTest from './Tone'
 
 const App = () => {
   const key = '749c84e5257c5b61d9d58d6cf12fca84'
@@ -38,7 +38,7 @@ const App = () => {
   return (
     <div>
       <h1>weatherer</h1>
-      <Tone
+      <ToneTest
         temperature={temperature}
         windSpeed={windSpeed}
         pressure={pressure}

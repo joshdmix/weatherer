@@ -18,7 +18,7 @@ const ToneTest = props => {
       synth.triggerAttackRelease(note, time)
     },
     notes,
-    `10n`,
+    `5`,
   )
   synthPart.start()
   return (
