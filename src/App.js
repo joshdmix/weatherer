@@ -20,7 +20,7 @@ const App = () => {
   const getWeather = async () => {
     console.log('request')
     const api_call = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?zip=40243,us&appid=${key}`,
+      `https://api.openweathermap.org/data/2.5/weather?zip=40243,us&appid=${key}`,
     )
     const response = await api_call.json()
     setTemperature(response.main.temp)
