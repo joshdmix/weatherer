@@ -37,7 +37,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>weatherer</h1>
+      <h1>weathered wizard</h1>
       <ToneTest
         temperature={temperature}
         windSpeed={windSpeed}
