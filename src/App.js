@@ -14,8 +14,9 @@ const App = () => {
   const [pressure, setPressure] = useState()
   const [windSpeed, setWindSpeed] = useState()
   const [windDirection, setWindDirection] = useState()
+  const [run, setRun] = useState(true)
 
-  useEffect(() => setInterval(() => getWeather(), 3000), [])
+  // useEffect(() => setInterval(() => getWeather(), 3000), [])
 
   const getWeather = async () => {
     console.log('request')
@@ -44,12 +45,7 @@ const App = () => {
         pressure={pressure}
         humidity={humidity}
       />
-      <Synth
-        temperature={temperature}
-        humidity={humidity}
-        pressure={pressure}
-        windSpeed={windSpeed}
-      />
+      <Synth />
     </div>
   )
 }

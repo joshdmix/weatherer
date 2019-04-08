@@ -1,7 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Tone from 'tone'
 
-const synths = [new Tone.Synth(), new Tone.DuoSynth(), new Tone.PolySynth()]
+const synths = [
+  new Tone.FMSynth({
+    harmonicity: 4,
+    oscillator: { type: 'square' },
+    envelope: { release: 1 },
+  }),
+  new Tone.DuoSynth(),
+  new Tone.PolySynth(),
+]
 
 // synths[1].oscillator.type = 'triangle'
 // synths[2].oscillator.type = 'square'
@@ -9,47 +17,48 @@ const synths = [new Tone.Synth(), new Tone.DuoSynth(), new Tone.PolySynth()]
 
 const gain = new Tone.Gain(0.1)
 gain.toMaster()
-const reverb = new Tone.Reverb()
-reverb.connect(gain)
+// const reverb = new Tone.Reverb()
+// reverb.connect(gain)
 
 synths.forEach(synth => synth.connect(gain))
 
 const ToneTest = props => {
+  const [count, setCount] = useState(0)
+  const [wizard, setWizard] = useState(true)
   const { temperature, windSpeed, pressure, humidity } = props
+  const notes = [temperature / 3, humidity * 1.5, pressure / 8]
+  // console.log(notes)
   useEffect(() => {
-    Tone.Transport.stop()
-    Tone.Transport.start()
-    console.log('updated')
-  }, [temperature, pressure, humidity])
-  const notes = [temperature / 2, humidity * 4, pressure / 4]
-  console.log('P:', pressure / 4)
-  console.log('T:', temperature / 2)
-  console.log('H:', humidity)
+    setCount(count + 1)
+    console.log(count)
+    if (!wizard) return null
+    // wizardry(windSpeed)
+  }, [pressure, humidity, temperature, windSpeed])
   // create a new sequence with the synth and notes
-  // const synthPart = new Tone.Sequence(
+  // const wizardSeq = new Tone.Sequence(
   //   function(time, note) {
   //     synth.triggerAttackRelease(note, time).connect(reverb)
   //   },
   //   notes,
   //   humidity,
   // )
-  // synthPart.start()
-  const repeat = time => {
+  const wizardry = time => {
+    console.log('wizzhard')
     notes.forEach((note, i) => {
-      // console.log(note, synths[i])
+      console.log(note, synths[i])
       return isFinite(note)
-        ? synths[i].triggerAttackRelease(note, 100, time)
+        ? synths[i].triggerAttackRelease(note, 10, time)
         : null
     })
   }
 
-  Tone.Transport.scheduleRepeat(repeat, 99)
+  // Tone.Transport.scheduleRepeat(repeat, 1)
 
   return (
     <>
       {!temperature && <p>wait...</p>}
       {temperature && <p>heavily inspired by quintron's weather warlock</p>}
-      <button onClick={() => Tone.Transport.stop()}>Stop</button>
+      <button onClick={() => setWizard(false)}>Stop</button>
     </>
   )
 }
