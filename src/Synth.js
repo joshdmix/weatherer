@@ -32,11 +32,8 @@ const Synth = props => {
 
   return (
     <div>
-      <button onClick={() => Tone.Transport.pause()}>Pause</button>
-      <button onClick={() => Tone.Transport.start()}>Start</button>
-      <button onClick={() => setRandomizeBpm(true)}>Randomize time</button>
-      <button onClick={() => Tone.Transport.start()}>Start</button>
-      <button>Pause</button>
+					<p>random sound gen experiment</p>
+					<p>originally used weather api to generate drones and may again at some point</p>
     </div>
   )
 }

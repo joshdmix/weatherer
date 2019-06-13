@@ -56,9 +56,6 @@ const ToneTest = props => {
 
   return (
     <>
-      {!temperature && <p>wait...</p>}
-      {temperature && <p>heavily inspired by quintron's weather warlock</p>}
-      <button onClick={() => setWizard(false)}>Stop</button>
     </>
   )
 }
