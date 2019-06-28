@@ -43,7 +43,7 @@ const ToneTest = props => {
   //   humidity,
   // )
   const wizardry = time => {
-    console.log('wizzhard')
+    console.log('wizrd')
     notes.forEach((note, i) => {
       console.log(note, synths[i])
       return isFinite(note)
